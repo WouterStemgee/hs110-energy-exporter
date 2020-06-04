@@ -1,7 +1,7 @@
 # HS110 Energy Monitor - InfluxDB Exporter
 > A TP-link HS110 Smart Plug Exporter for InfluxDB
 
-# Install & usage
+## Install & Usage
 ```bash
 git clone https://gitlab.wouterstemgee.be/wouterstemgee/hs110-influx.git
 npm install
@@ -14,7 +14,7 @@ HOSTNAME=hs110 \
 npm start
 ```
 
-# Docker usage
+## Docker usage
 ```bash
 docker run \
   -e TIMER=1000 \
@@ -27,7 +27,7 @@ docker run \
 
 ```
 
-# Export JSON Format
+## Export JSON Format
 `power_consumption` measurement point:
 ```json
 {

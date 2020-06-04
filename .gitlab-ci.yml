@@ -7,6 +7,7 @@ docker_build:
   services:
     - docker:dind
   before_script:
+  - export CI_REGISTRY="registry.wouterstemgee.be"
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   - docker info
   script:

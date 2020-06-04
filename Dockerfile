@@ -1,6 +1,6 @@
 FROM node
 
-ADD . /app
+ADD app /app
 
 WORKDIR /app
 

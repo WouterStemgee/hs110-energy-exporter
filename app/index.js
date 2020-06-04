@@ -1,5 +1,3 @@
-import Reporter from './reporter';
-
-const reporter = new Reporter();
-
+const Reporter = require('./reporter.js');
+let reporter = new Reporter();
 reporter.run();

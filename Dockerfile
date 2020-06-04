@@ -1,4 +1,4 @@
-FROM node
+FROM node:latest
 
 ADD app /app
 
@@ -6,4 +6,4 @@ WORKDIR /app
 
 RUN npm install
 
-CMD node index.js
+CMD ["node", "index.js"]

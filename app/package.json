@@ -1,7 +1,7 @@
 {
   "name": "hs110-influx",
   "version": "1.0.0",
-  "description": "Tp-link hs110 smart plug influxdb exporter",
+  "description": "TP-Link HS110 Smart Plug InfluxDB Exporter",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -10,8 +10,8 @@
   "license": "MIT",
   "repository": "gitlab:gitlab.wouterstemgee.be/hs110-influx",
   "dependencies": {
-    "influx": "^5.0.7",
+    "influx": "^5.5.1",
     "os": "^0.1.1",
-    "tplink-smarthome-api": "^0.22.0"
+    "tplink-smarthome-api": "^2.0.0"
   }
 }

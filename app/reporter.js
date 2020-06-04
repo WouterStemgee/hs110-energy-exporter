@@ -1,10 +1,10 @@
-import { InfluxDB, FieldType } from 'influx';
-import { hostname } from 'os';
+const { InfluxDB, FieldType } =  require('influx');
+const { hostname } =  require('os');
 
 const host = process.env.HOSTNAME || hostname();
 const db = process.env.INFLUX_DB || 'hs110_db';
 
-import { Client } from 'tplink-smarthome-api';
+const { Client } = require('tplink-smarthome-api');
 
 const client = new Client();
 
@@ -36,6 +36,9 @@ class Reporter {
                 fields: res,
             }
         ])
+        .catch(err => {
+            console.log(err.message)
+        })
     }
     getDevice () {
         return client.getDevice({host: process.env.DEVICE_IP_ADDR})
@@ -89,3 +92,5 @@ class Reporter {
             });
     }
 }
+
+module.exports = Reporter;

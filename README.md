@@ -1,5 +1,5 @@
 # HS110 Energy Monitor - InfluxDB Exporter
-> A TP-link HS110 Smart Plug Exporter for InfluxDB
+> A TP-Link HS110 Smart Plug Exporter for InfluxDB
 
 ## Install & Usage
 ```bash

@@ -1,0 +1,10 @@
+before_script:
+  - docker info
+
+docker_build:
+  script:
+    - docker build --pull --rm -f "Dockerfile" -t hs110influx:latest "."
+
+docker_run:
+  script:
+    - docker run --rm -it  hs110influx:latest

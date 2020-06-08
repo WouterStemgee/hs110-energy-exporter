@@ -2,8 +2,9 @@ stages:
   - build
 
 variables:
-  - DOCKER_REPOSITORY: hs110influx
-  - DOCKER_REGISTRY: docker.jfrog.wouterstemgee.be
+  DOCKER_REPOSITORY: hs110influx
+  DOCKER_REGISTRY: docker.jfrog.wouterstemgee.be
+  
 docker_build:
   image: docker:latest
   stage: build

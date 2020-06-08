@@ -3,6 +3,7 @@ stages:
 
 variables:
   DOCKER_REPOSITORY: hs110influx
+  DOCKER_TAG: latest
   DOCKER_REGISTRY: docker.jfrog.wouterstemgee.be
   
 docker_build:
@@ -14,9 +15,8 @@ docker_build:
     - docker login -u gitlab-ci -p gitlab-ci ${DOCKER_REGISTRY}
   script:
     - export DOCKER_HOST=tcp://localhost:2375
-    - export REVISION=$(git rev-parse --short HEAD)
-    - docker build --pull --rm -f "Dockerfile" -t ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${REVISION} "."
-    - docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${REVISION}
+    - docker build --pull --rm -f "Dockerfile" -t ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${DOCKER_TAG} "."
+    - docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${DOCKER_TAG}
   only:
     - master
 
@@ -27,4 +27,4 @@ docker_run:
     - docker:dind
   script:
     - export DOCKER_HOST=tcp://localhost:2375
-    - docker run --rm -it ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${REVISION}
+    - docker run --rm -it ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${DOCKER_TAG}

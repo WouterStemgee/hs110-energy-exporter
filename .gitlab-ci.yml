@@ -11,10 +11,9 @@ docker_build:
   services:
     - docker:dind
   before_script:
-    - docker login -u gitlab-ci -p gitlab-ci $DOCKER_REGISTRY
+    - docker login -u gitlab-ci -p gitlab-ci ${DOCKER_REGISTRY}
   script:
-    - docker build --pull --rm -f "Dockerfile" -t ${DOCKER_REPOSITORY} "."
-    - docker tag ${PROJECT_NAME} ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:latest
+    - docker build --pull --rm -f "Dockerfile" -t ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:latest "."
     - docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:latest
   only:
     - master
@@ -22,4 +21,4 @@ docker_build:
 docker_run:
   stage: build
   script:
-    - docker run --rm -it $DOCKER_REPOSITORY:latest
+    - docker run --rm -it ${DOCKER_REPOSITORY}:latest

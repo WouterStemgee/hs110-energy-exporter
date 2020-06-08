@@ -11,7 +11,7 @@ docker_build:
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
   before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u gitlab-ci -p gitlab-ci docker.jfrog.wouterstemgee.be
     - docker info
   script:
     - docker build --pull --rm -f "Dockerfile" -t hs110influx:latest "."

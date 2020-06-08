@@ -13,12 +13,18 @@ docker_build:
   before_script:
     - docker login -u gitlab-ci -p gitlab-ci ${DOCKER_REGISTRY}
   script:
-    - docker build --pull --rm -f "Dockerfile" -t ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:latest "."
-    - docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:latest
+    - export DOCKER_HOST=tcp://localhost:2375
+    - export REVISION=$(git rev-parse --short HEAD)
+    - docker build --pull --rm -f "Dockerfile" -t ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${REVISION} "."
+    - docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${REVISION}
   only:
     - master
 
 docker_run:
+  image: docker:latest
   stage: build
+  services:
+    - docker:dind
   script:
-    - docker run --rm -it ${DOCKER_REPOSITORY}:latest
+    - export DOCKER_HOST=tcp://localhost:2375
+    - docker run --rm -it ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:${REVISION}

@@ -13,7 +13,6 @@ docker_build:
   before_script:
     - docker login -u gitlab-ci -p gitlab-ci $DOCKER_REGISTRY
   script:
-    - export DOCKER_HOST="${HOSTNAME}-docker"
     - docker build --pull --rm -f "Dockerfile" -t ${DOCKER_REPOSITORY} "."
     - docker tag ${PROJECT_NAME} ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:latest
     - docker push ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}:latest

@@ -13,7 +13,7 @@ docker run \
   -e INFLUX_HOST=localhost \        # InfluxDB hostname
   -e INFLUX_DB=hs110_db \           # InfluxDB database name
   -e HOSTNAME=hs110 \               # Smart device name (can be anything) 
-  -d wouterstemgee/hs110-influx
+  -d wouterstemgee/hs110influx
 ```
 
 ## Output

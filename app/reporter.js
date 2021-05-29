@@ -1,15 +1,12 @@
-const { InfluxDB, FieldType } =  require('influx');
-const { hostname } =  require('os');
-
-const host = process.env.HOSTNAME || hostname();
-const db = process.env.INFLUX_DB || 'hs110_db';
-
+const { InfluxDB, FieldType } = require('influx');
 const { Client } = require('tplink-smarthome-api');
 
-const client = new Client();
+const host = process.env.HOSTNAME;
+const db = process.env.INFLUX_DB;
 
+const client = new Client();
 const influx = new InfluxDB({
-    host: process.env.INFLUX_HOST || 'localhost',
+    host: process.env.INFLUX_HOST,
     database: db,
     schema: [
         {
@@ -28,28 +25,34 @@ const influx = new InfluxDB({
 });
 
 class Reporter {
+    constructor() {
+        this.timer = process.env.TIMER || 5000;
+        this.device = null;
+    }
+
     export(res) {
         influx.writePoints([
             {
                 measurement: 'power_consumption',
-                tags: {host: host},
-                fields: res,
+                tags: { host: host },
+                fields: {
+                    current_ma: res.current_ma,
+                    voltage_mv: res.voltage_mv,
+                    total_wh: res.total_wh,
+                    power_mw: res.power_mw
+                },
             }
         ])
-        .catch(err => {
-            console.log(err.message)
-        })
+            .catch(err => {
+                console.log(err.message)
+            })
     }
-    getDevice () {
-        return client.getDevice({host: process.env.DEVICE_IP_ADDR})
+    getDevice() {
+        return client.getDevice({ host: process.env.DEVICE_IP_ADDR })
             .then(device => {
                 this.device = device;
                 return device;
             })
-    }
-    constructor() {
-        this.timer = process.env.TIMER || 5000;
-        this.device = null;
     }
 
     query() {
@@ -62,21 +65,19 @@ class Reporter {
     }
 
     log(res) {
-        if (!process.env.DEBUG) return res;
-        console.log(res);
+        if (process.env.DEBUG) console.log(res);
         return res
     }
 
-    checkDatabase() {
-        return influx.getDatabaseNames()
-            .then(names => {
-                if (!names.includes(db)) {
-                    return influx.createDatabase(db);
-                }
-            })
-            .catch(err => {
-                console.error(`Error creating Influx database!`);
-            })
+    async checkDatabase() {
+        try {
+            const names = await influx.getDatabaseNames();
+            if (!names.includes(db)) {
+                return influx.createDatabase(db);
+            }
+        } catch (err) {
+            console.error(`Error creating Influx database!`,);
+        }
     }
 
     run() {
@@ -88,6 +89,7 @@ class Reporter {
                         .then(res => this.format(res))
                         .then(res => this.log(res))
                         .then(res => this.export(res))
+                        .catch(err => console.error(err.message))
                 }, this.timer)
             });
     }

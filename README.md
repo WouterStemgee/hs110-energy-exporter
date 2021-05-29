@@ -1,39 +1,27 @@
 # HS110 Energy Monitor - InfluxDB Exporter
-> A TP-Link HS110 Smart Plug Exporter for InfluxDB
+A TP-Link HS110 smart plug data exporter for InfluxDB using the [tplink-smarthome-api](https://www.npmjs.com/package/tplink-smarthome-api).
 
-## Install & Usage
-```bash
-git clone https://gitlab.wouterstemgee.be/wouterstemgee/hs110-influx.git
-npm install
-
-TIMER=1000 \
-DEVICE_IP_ADDR=10.20.0.110 \
-DEBUG=true \
-INFLUX_HOST=localhost \
-HOSTNAME=hs110 \
-npm start
-```
-
-## Docker usage
+## Usage: Docker
 ```bash
 docker run \
-  -e TIMER=1000 \
-  -e DEVICE_IP_ADDR=10.20.0.110 \
-  -e DEBUG=true \
-  -e INFLUX_HOST=localhost \
-  -e INFLUX_DB=hs110_db \
-  -e HOSTNAME=hs110 \
+  -e TIMER=1000 \                   # Interval between measurement points
+  -e DEVICE_IP_ADDR=10.20.0.110 \   # Smart device IP address
+  -e INFLUX_HOST=localhost \        # InfluxDB hostname
+  -e INFLUX_DB=hs110_db \           # InfluxDB database name
+  -e HOSTNAME=hs110 \               # Smart device name (can be anything) 
   -d wouterstemgee/hs110-influx
-
 ```
 
-## Export JSON Format
-`power_consumption` measurement point:
+## Output
+### [Grafana Visualization](dashboard/energy_usage.json)
+![Grafana screenshot](assets/dashboard.png)
+### Data Format
+Example `power_consumption` timeseries measurement point:
 ```json
 {
-    "voltage_vm": 0,
-    "current_ma": 0,
-    "power_mw": 0,
-    "total_wh": 0
+  "voltage_mv": 230983,
+  "current_ma": 426,
+  "power_mw": 59497,
+  "total_wh": 30964,
 }
 ```

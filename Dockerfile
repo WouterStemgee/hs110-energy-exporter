@@ -1,9 +1,9 @@
 FROM node:latest
 
-ADD app /app
-
 WORKDIR /app
+
+COPY . .
 
 RUN npm install
 
-CMD ["node", "index.js"]
+CMD ["node", "app/main.js"]

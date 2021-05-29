@@ -1,0 +1,20 @@
+{
+  "name": "hs110-influx",
+  "version": "2.0.0",
+  "description": "TP-Link HS110 Energy Monitor - InfluxDB Exporter",
+  "main": "app/main.js",
+  "scripts": {
+    "install": "npm install",
+    "start": "node app/main.js",
+    "test": ""
+  },
+  "author": "Wouter Stemgée <wouterstemgee@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/WouterStemgee/tplink-hs110-energy-data-exporter",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "influx": "^5.9.0",
+    "os": "^0.1.1",
+    "tplink-smarthome-api": "^3.3.0"
+  }
+}

@@ -3,7 +3,7 @@
 [![DockerHub](https://img.shields.io/docker/pulls/wouterstemgee/hs110-influx)](https://hub.docker.com/repository/docker/wouterstemgee/hs110-influx)
 [![License](https://img.shields.io/github/license/WouterStemgee/tplink-hs110-energy-data-exporter)](LICENSE)
 
-A TP-Link HS110 smart plug data exporter for InfluxDB using the [tplink-smarthome-api](https://www.npmjs.com/package/tplink-smarthome-api).
+A [TP-Link HS110 smart plug](https://www.tp-link.com/nl-be/home-networking/smart-plug/hs110/) data exporter for InfluxDB using the [tplink-smarthome-api](https://www.npmjs.com/package/tplink-smarthome-api).
 
 ## Usage: Docker
 ```bash

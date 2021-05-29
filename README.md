@@ -1,4 +1,8 @@
 # HS110 Energy Monitor - InfluxDB Exporter
+[![CI](https://github.com/WouterStemgee/tplink-hs110-energy-data-exporter/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/WouterStemgee/tplink-hs110-energy-data-exporter/actions/workflows/CI.yml)
+[![DockerHub](https://img.shields.io/docker/pulls/wouterstemgee/hs110-influx)](https://hub.docker.com/repository/docker/wouterstemgee/hs110-influx)
+[![License](https://img.shields.io/github/license/WouterStemgee/tplink-hs110-energy-data-exporter)](LICENSE)
+
 A TP-Link HS110 smart plug data exporter for InfluxDB using the [tplink-smarthome-api](https://www.npmjs.com/package/tplink-smarthome-api).
 
 ## Usage: Docker

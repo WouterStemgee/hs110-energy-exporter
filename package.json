@@ -4,7 +4,6 @@
   "description": "TP-Link HS110 Energy Monitor - InfluxDB Exporter",
   "main": "app/main.js",
   "scripts": {
-    "install": "npm install",
     "start": "node app/main.js",
     "test": ""
   },
